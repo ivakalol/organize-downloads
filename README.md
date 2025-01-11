@@ -6,11 +6,12 @@ This project includes two files to help organize and manage files in the `Downlo
 
 ### 1. **`run_script.bat`**
 - **Description**: A batch file to execute the Python script with minimal effort.
-- **Contents**:
+- **Make it run**:
   ```batch
-  @echo off
+  in the .bat file you should edit this:
   python "C:\your\path\to\Scrypt.py"
-  pause
+
+  while in the python file you should edit your downloads directory
   ```
 - **Purpose**: Automates the execution of the Python script.
 
