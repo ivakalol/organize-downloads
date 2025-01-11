@@ -68,6 +68,3 @@ Empty folders will be removed automatically.
 ## Customization
 - **Directory to Organize**: Modify the `downloads_directory` variable to target a different folder.
 - **Logging Format**: Adjust the `logging.basicConfig()` settings to customize log verbosity or format.
-
-## License
-This project is licensed under the MIT License. See the `LICENSE` file for details.
