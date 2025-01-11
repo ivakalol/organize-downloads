@@ -7,53 +7,54 @@ import logging
 # Set up logging
 logging.basicConfig(level=logging.INFO, format="%(message)s\n")
 
-def is_folder_empty(folder_path):
-    return len(listdir(folder_path)) == 0
+def is_folder_empty(directory_path):
+    """Check if a directory is empty."""
+    return len(listdir(directory_path)) == 0
 
 try:
     # Path to organize
-    file_path = r"C:\Users\Ivaka2\Downloads"
-    logging.info("Starting to organize files in: %s", file_path)
+    downloads_directory = r"C:\Users\Ivaka2\Downloads"
+    logging.info("Starting to organize files in: %s", downloads_directory)
     
     # Get all files in the directory
-    files = [f for f in listdir(file_path) if isfile(join(file_path, f))]
-    logging.info("Found %d file(s) to process.", len(files))
+    all_files = [file for file in listdir(downloads_directory) if isfile(join(downloads_directory, file))]
+    logging.info("Found %d file(s) to process.", len(all_files))
 
-    for file in files:
+    for current_file in all_files:
         try:
-            filename, filetype = os.path.splitext(file)
-            filetype = filetype[1:].lower()
+            base_name, extension = os.path.splitext(current_file)
+            extension = extension[1:].lower()  # Remove the dot and normalize to lowercase
 
-            # Create folder for file type if it doesn't exist
-            folder_name = join(file_path, filetype if filetype else "no_extension")
-            if not isdir(folder_name):
-                os.mkdir(folder_name)
-                logging.info("Created folder: %s", folder_name)
+            # Create a folder for the file type if it doesn't exist
+            folder_for_extension = join(downloads_directory, extension if extension else "no_extension")
+            if not isdir(folder_for_extension):
+                os.mkdir(folder_for_extension)
+                logging.info("Created folder: %s", folder_for_extension)
 
             # Move the file
-            src_file = join(file_path, file)
-            dest_file = join(folder_name, file)
+            source_path = join(downloads_directory, current_file)
+            destination_path = join(folder_for_extension, current_file)
 
-            if not os.path.exists(dest_file):
-                shutil.move(src_file, dest_file)
-                logging.info("Moved file: %s -> %s", src_file, dest_file)
+            if not os.path.exists(destination_path):
+                shutil.move(source_path, destination_path)
+                logging.info("Moved file: %s -> %s", source_path, destination_path)
             else:
-                new_dest_file = join(folder_name, f"{filename}_i.{filetype}")
-                shutil.move(src_file, new_dest_file)
-                logging.info("File already exists. Renamed and moved: %s -> %s", src_file, new_dest_file)
+                renamed_destination_path = join(folder_for_extension, f"{base_name}_i.{extension}")
+                shutil.move(source_path, renamed_destination_path)
+                logging.info("File already exists. Renamed and moved: %s -> %s", source_path, renamed_destination_path)
         except Exception as file_error:
-            logging.error("Error processing file '%s': %s", file, file_error)
+            logging.error("Error processing file '%s': %s", current_file, file_error)
 
     # Remove empty folders
     logging.info("Checking for empty folders to remove...")
-    for folder in listdir(file_path):
+    for directory in listdir(downloads_directory):
         try:
-            folder_path = join(file_path, folder)
-            if isdir(folder_path) and is_folder_empty(folder_path):
-                os.rmdir(folder_path)
-                logging.info("Removed empty folder: %s", folder_path)
+            directory_path = join(downloads_directory, directory)
+            if isdir(directory_path) and is_folder_empty(directory_path):
+                os.rmdir(directory_path)
+                logging.info("Removed empty folder: %s", directory_path)
         except Exception as folder_error:
-            logging.error("Error removing folder '%s': %s", folder, folder_error)
+            logging.error("Error removing folder '%s': %s", directory, folder_error)
 
     logging.info("File organization completed successfully.")
 
