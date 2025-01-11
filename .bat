@@ -1,1 +1,3 @@
-start "" "C:\Program Files\Python38\pythonw.exe" "C:\Users\Ivaka2\Documents\GitHub\organize-downloads\Scrypt.py"
+@echo off
+python "C:\Git Hub\organize-downloads\Scrypt.py"
+pause
