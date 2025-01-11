@@ -1,47 +1,73 @@
-# Organize Downloads Script
 
-This project includes two files to help organize and manage files in the `Downloads` directory. The batch file ensures easy execution of the Python script, which organizes files into folders based on their file types.
+# File Organizer Script
 
-## Files
+This Python script organizes files in a specified directory by moving them into subfolders based on their file extensions. It's especially useful for keeping directories like the Downloads folder tidy.
 
-### 1. **`run_script.bat`**
-- **Description**: A batch file to execute the Python script with minimal effort.
-- **Make it run**:
-  ```batch
-  in the .bat file you should edit this:
-  python "C:\your\path\to\Scrypt.py"
+## Features
+- Automatically creates folders for each file extension.
+- Moves files into their respective folders.
+- Handles duplicate file names by renaming duplicates with a suffix.
+- Removes empty folders after organizing files.
+- Logs detailed information about the process, including file movements, folder creation, and errors.
 
-  while in the python file you should edit your downloads directory
-  ```
-- **Purpose**: Automates the execution of the Python script.
+## Requirements
+- Python 3.x
+- Required modules: `os`, `shutil`, and `logging`.
 
-### 2. **`Scrypt.py`**
-- **Description**: A Python script that organizes files in the `Downloads` directory into folders based on their file types.
-- **Key Features**:
-  - Files are moved into folders named after their file types (e.g., `.pdf` files go to `pdf_folder`).
-  - If a file with the same name already exists, the script appends `_i` to the new file's name to prevent overwriting.
-  - Automatically creates folders for new file types.
-  - Removes empty folders in the `Downloads` directory.
+## How It Works
+1. The script scans the specified directory for all files.
+2. For each file:
+   - It determines the file extension.
+   - It creates a folder named after the file extension (e.g., `.txt` files go into a `txt` folder).
+   - Moves the file into the corresponding folder.
+   - If a file with the same name already exists in the destination folder, it renames the file by appending `_i` to the name.
+3. After processing all files, it removes any empty folders in the directory.
 
-## How to Use
+## Logging
+The script uses Python’s logging module to provide real-time feedback. Logs include:
+- Folder creation.
+- File movement and renaming.
+- Empty folder removal.
+- Error handling for problematic files or folders.
 
-### Prerequisites
-- Python installed on your system (ensure the `python` command is available in your terminal).
+## Usage
+1. Clone or download this repository.
+2. Update the `downloads_directory` variable in the script with the path of the directory you want to organize.
+3. Run the script:
+   ```bash
+   python file_organizer.py
+   ```
 
-### Steps to Run
-1. Place both files (`run_script.bat` and `Scrypt.py`) in the same directory.
-2. Update the `file_path` in `Scrypt.py` to point to your actual `Downloads` directory.
-3. Double-click on `run_script.bat` to execute the script.
-4. The `Downloads` folder will now be organized, with files moved to their respective folders.
+## Example
+Given the following files in the `Downloads` folder:
+```
+example.txt
+image.png
+document.pdf
+example (duplicate).txt
+```
 
-### Output
-- Files will be moved into folders named after their file types.
-- Empty folders in the `Downloads` directory will be removed.
+After running the script:
+```
+Downloads/
+├── txt/
+│   ├── example.txt
+│   ├── example_i.txt
+├── png/
+│   ├── image.png
+├── pdf/
+│   ├── document.pdf
+```
 
-## Notes
-- Ensure you have permission to modify the `Downloads` directory and its contents.
-- Existing files in type folders will not be overwritten; the new files will have `_i` appended to their names.
-- If you encounter any issues, ensure that Python is correctly installed and the script's paths are correctly configured.
+Empty folders will be removed automatically.
+
+## Error Handling
+- If the script encounters a file or folder it cannot process, it logs an error but continues execution.
+- Example errors include permission issues or invalid file paths.
+
+## Customization
+- **Directory to Organize**: Modify the `downloads_directory` variable to target a different folder.
+- **Logging Format**: Adjust the `logging.basicConfig()` settings to customize log verbosity or format.
 
 ## License
-This project is free to use and distribute. Modify it as needed for your personal use!
+This project is licensed under the MIT License. See the `LICENSE` file for details.
