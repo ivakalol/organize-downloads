@@ -5,10 +5,9 @@ import shutil
 import logging
 
 # Set up logging
-logging.basicConfig(level=logging.INFO, format="%(message)s")
+logging.basicConfig(level=logging.INFO, format="%(message)s\n")
 
 def is_folder_empty(folder_path):
-    """Check if a folder is empty."""
     return len(listdir(folder_path)) == 0
 
 try:
