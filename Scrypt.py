@@ -29,15 +29,10 @@ try:
 
         if not os.path.exists(dest_file):
             shutil.move(src_file, dest_file)
-
-            logging.basicConfig(level=logging.INFO)
-            logging.info(f"Moving {src_file} to {dest_file}")
         else:
             new_dest_file = join(folder_name, f"{filename}_i.{filetype}")
 
             shutil.move(src_file, new_dest_file)
-            logging.basicConfig(level=logging.INFO)
-            logging.info(f"Moving {src_file} to {dest_file}")
 
     # Remove empty folders
     for folder in listdir(file_path):
