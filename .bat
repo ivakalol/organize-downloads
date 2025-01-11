@@ -1,3 +1,3 @@
 @echo off
-python "C:\Git Hub\organize-downloads\Scrypt.py"
+python "C:\Users\Ivaka2\Documents\GitHub\organize-downloads\Scrypt.py"
 pause
