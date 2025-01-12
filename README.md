@@ -35,7 +35,7 @@ The script uses Python’s logging module to provide real-time feedback. Logs in
 2. Update the `downloads_directory` variable in the script with the path of the directory you want to organize.
 3. Run the script:
    ```bash
-   python file_organizer.py
+   python Scrypt.py
    ```
 
 ## Example
