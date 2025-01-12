@@ -13,7 +13,7 @@ def is_folder_empty(directory_path):
 
 try:
     # Path to organize
-    downloads_directory = r"C:\Users\Ivaka2\Downloads"
+    downloads_directory = r"C:\Users\yourUser\Downloads"
     logging.info("Starting to organize files in: %s", downloads_directory)
     
     # Get all files in the directory
